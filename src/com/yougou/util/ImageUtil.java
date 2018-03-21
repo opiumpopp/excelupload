@@ -81,8 +81,6 @@ public class ImageUtil {
 		}
 		fis.close();
 		fos.close();
-		
-		System.out.println("图片已复制到目标目录并且重命名了");
 	}
 	
 	/**
