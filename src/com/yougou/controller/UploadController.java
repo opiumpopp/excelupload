@@ -1,6 +1,8 @@
 package com.yougou.controller;
 
 import java.io.InputStream;
+import java.util.Random;
+
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -19,12 +21,14 @@ public class UploadController {
 		HSSFSheet sheet = hssf.getSheetAt(0);
 		HSSFRow row1 = sheet.getRow(1);
 		String insideCode = row1.getCell(4).toString();
-		ImageUtil.copyImage(insideCode);
+		Random r = new Random();
+		int no = r.nextInt(8);
+		ImageUtil.copyImage(insideCode,no);
 		int num = sheet.getLastRowNum();
 		for(int i = 1; i <= num;i++) {
 			HSSFRow row2 = sheet.getRow(i);
 			String imageName = row2.getCell(5).toString();
-			ImageUtil.copyImage(insideCode, imageName);
+			ImageUtil.copyImage(insideCode, imageName,no);
 		}
 		System.out.println("图片已经复制到指定目录并且命名完成");
 		return "result";

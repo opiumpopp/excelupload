@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  * 图片工具类
@@ -14,9 +15,9 @@ import java.util.List;
  */
 public class ImageUtil {
 	/**
-	 * 拿到电脑自带的图片，名为Chrysanthemum.jpg
+	 * 随机拿到一张电脑自带的图片
 	 */
-	public static String getImageName() {
+	public static String getImageName(int no) {
 		File file = new File("C:\\Users\\Public\\Pictures\\Sample Pictures");
 		String[] arr = file.list();
 		List<String> list = Arrays.asList(arr);
@@ -32,15 +33,15 @@ public class ImageUtil {
 		//移除desktop.ini这个隐藏文件
 		arrayList.remove(2);
 		Object[] array = arrayList.toArray();
-		return array[0].toString();
+		return array[no].toString();
 	}
 	
 	/**
 	 * 把拿到的图片移动到指定目录下
 	 * @throws Exception 
 	 */
-	public static void copyImage(String insideCode) throws Exception {
-		String imageName = getImageName();
+	public static void copyImage(String insideCode, int no) throws Exception {
+		String imageName = getImageName(no);
 		File src = new File("C:\\Users\\Public\\Pictures\\Sample Pictures\\" + imageName);
 		File dest = new File("E:\\image\\" + insideCode);
 		if(!dest.exists()) {
@@ -64,8 +65,8 @@ public class ImageUtil {
 	 * 把图片复制并重命名到目标目录下
 	 * @throws Exception 
 	 */
-	public static void copyImage(String insideCode,String newName) throws Exception {
-		String oldName = getImageName();
+	public static void copyImage(String insideCode,String newName, int no) throws Exception {
+		String oldName = getImageName(no);
 		File file1 = new File("E:\\image\\" + insideCode);
 		File file2 = new File("E:\\image\\" + insideCode + "\\拍摄图\\");
 		if(!file2.exists()) {
@@ -83,13 +84,4 @@ public class ImageUtil {
 		fos.close();
 	}
 	
-	/**
-	 * 测试方法
-	 */
-	public static void main(String[] args) throws Exception {
-		String insideCode = "4053984071197";
-		String newName = "4053984071197_0";
-		copyImage(insideCode);
-		copyImage(insideCode,newName);
-	}
 }
